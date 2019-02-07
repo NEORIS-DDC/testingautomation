@@ -1,0 +1,98 @@
+<html>
+<head>
+	<title>inter&eacute;s</title>
+	<script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <style>
+	    label.error{
+		  color: red;
+		  font-style: italic;
+		  display: block;
+		}
+		input.error {
+		  border: 1px dotted red;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<header>
+		Calculador de inter&eacute;s
+	</header>
+
+	<section>
+		<div id="main">
+		<form id="interestForm" novalidate="novalidate">
+			
+			<p>
+				<strong>Ingrese una cantidad de dinero</strong>
+			</p>
+			<div class="input">
+				<div class="currency symbol">$</div>
+				<input type="text" class="custom-input" id="amount" name="amount" maxlength="10" size="10" required="" title="Por favor ingrese cantidad de dinero" aria-required="true">
+			</div>
+
+			<p>
+				<strong>Indique la tasa de inter&eacute;s en porcentaje</strong>
+			</p>
+			<div id="porcentaje">
+				<div class="input">
+					<div class="currency symbol">%</div>
+					<input type="text" class="custom-input" name="rate" maxlength="10" size="10" required="" title="Por favor ingrese tasa" aria-required="true">
+				</div>
+				<div class="periodo">
+					<h6 class="title-custom">Periodo</h6>
+					<select name="rate_units" required="" title="Por favor seleccione plazo de tasa" aria-required="true">
+						<option value="year">Anual</option>
+						<option value="month">Mensual</option>
+					</select>
+				</div>
+			</div>
+
+			<p>
+				<strong>¿Despu&eacute;s de cu&aacute;nto tiempo quieres saber cu&aacute;l ser&aacute; tu inter&eacute;s?</strong>
+			</p>
+			<div id="interes-futuro">
+				<div class="input">
+					<div class="span-container">
+						<span>Despu&eacutes de</span>
+					</div>
+					<input type="number" class="custom-input less-width" name="time" maxlength="5" size="5" required="" title="Por favor ingrese tiempo" aria-required="true"> 
+				</div>
+				<input type="radio" name="time_units" value="year" required="" title="Por favor seleccione a&ntilde;o o mes" aria-required="true">A&ntilde;o(s)
+				<input type="radio" name="time_units" value="month">Mes(es)
+			</div>
+			
+			<div class="error" style="display: none">
+			</div>
+			
+			<input type="submit" class="button" value="Calcular inter&eacute;s">
+		</form>
+		</div>
+
+	<div id="result" class="hidden">
+		<p>
+			Su monto con interes es de $<span id="interest"></span>
+		</p>
+		<p>
+			<button onclick="location.href='interes.html'" class="button" >Regresar</button>			
+		</p>
+	</div>
+	</section>	
+	
+	
+
+	<footer>
+		
+	</footer>
+
+	<script>
+		$("#interestForm").validate({
+			errorLabelContainer: $("#interestForm div.error")
+		});
+	</script>
+	<script type="text/javascript" src="../js/Interest.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+
+</body>
+</html>

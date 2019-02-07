@@ -1,0 +1,105 @@
+<html><head>
+	<title>AJAX</title>
+	<script src="../js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<script>
+		$(function() {
+			$("#make").change(function() {
+				$("#model").attr('disabled','disabled');
+				$("#accept").attr('disabled','disabled');
+				var make=$(this).val();
+				if (make!="") {
+					setTimeout(function() {
+						var models=getModels(make);
+						$("#model").html("<option value=''>Please select a model</option>");
+						var options="";
+						$.each(models,function(index,model){
+							options=options+"<option value='"+model+"'>"+model+"</option>";
+						});
+						$("#model").append(options);
+						$("#model").removeAttr('disabled');
+				    }, 3000 );
+				};
+			});
+			$("#model").change(function() {
+				var model=$(this).val();
+				if (model!="") $("#accept").removeAttr('disabled');
+				else $("#accept").attr('disabled','disabled');
+
+			});
+			$("#accept").click(function(e) {
+				e.preventDefault();
+				$('#start').hide();
+				$('#loading').show();
+		      	setTimeout(function() {
+		        	$('#loading').hide();
+		        	$('#back').before("<span id='value'>"+$("#make").val()+"-"+$("#model").val()+"</span>");
+		        	$('#finish').show();
+		      	}, 3000 );
+			});
+
+			$("#back").click(function(e) {
+				e.preventDefault();
+				$('#finish').hide();
+				$('#start').show();
+			});
+
+			function getModels(make){
+				var acura=["Integra", "RL", "TL"];
+				var audi=["A4", "S4", "A6"];
+				var bmw=["F12", "F20", "F25"];
+				if (make=="Acura") {return acura};
+				if (make=="Audi") {return audi};
+				if (make=="Bmw") {return bmw};
+			}
+		});
+	</script>
+	<header>
+	Autos por marca	
+	</header>
+
+	<section>
+		<div id="start">
+			<table>
+				<tbody><tr>
+					<td>Marca</td>
+					<td>		
+						<select id="make">
+							<option value="">Seleccione marca</option>
+							<option value="Acura">Acura</option>
+							<option value="Audi">Audi</option>
+							<option value="Bmw">BMW</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Modelo</td>
+					<td>		
+						<select id="model">
+							<option value="">Seleccione modelo</option>
+						</select>
+					</td>			
+				</tr>
+				<tr>
+					<td><button id="accept" disabled="disabled" class="button">Aceptar</button></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div id="loading" style="display:none">Loading... <img src="img/loader.gif"></div>
+		<div id="finish" style="display:none">
+			<strong>Result: </strong>
+			<div id="back">
+				<button type="button" class="button">Atras</button>
+			</div>
+		</div>
+
+	</section>
+
+	<footer>
+		
+	</footer>
+
+</body>
+</html>
